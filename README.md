@@ -10,3 +10,8 @@ Making a Google drive like desktop and mobile client, for Google Drive.
 
 Xamarin
 Google Drive's API
+
+### GoogleDrive test login
+
+- email: 	`drive.test.xamarin@gmail.com`
+- password:	`asdQWE123Xam`
