@@ -19,6 +19,10 @@ namespace DriveClient.Models
         /// </summary>
         public string Name { get; set; } = string.Empty;
         /// <summary>
+        /// The full Path of this folder, calculated field.
+        /// </summary>
+        public string fullPath { get; set; } = string.Empty;
+        /// <summary>
         /// The Description property of the file taken from the API data.
         /// </summary>
         public string Description { get; set; } = string.Empty;
