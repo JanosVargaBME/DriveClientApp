@@ -20,12 +20,17 @@ namespace DriveClient.Models
         /// </summary>
         public string MimeType { get; set; } = string.Empty;
         /// <summary>
-        /// The time the file was created, this is a property of the file taken from the API data.
-        /// </summary>
-        public DateTime createdTime { get; set; } = DateTime.Now;
-        /// <summary>
         /// The time the file was last modified, this is a property of the file taken from the API data.
         /// </summary>
-        public DateTime modifiedTime { get; set; } = DateTime.Now;
+        public DateTime ModifiedTime { get; set; } = DateTime.Now;
+
+        /*
+        public FileItem(string _ID, string _Name, string _Desc, string _Type, DateTime _created, long size, string mimeType, DateTime modifiedTime)
+            : base(_ID, _Name, _Desc, _Type, _created)
+        {
+            Size = size;
+            MimeType = mimeType;
+            this.ModifiedTime = modifiedTime;
+        }*/
     }
 }

@@ -22,7 +22,7 @@ namespace DriveClient.Services
                     ID = i.ToString(),
                     Description = "Ez egy fajl" + i.ToString(),
                     Size = 200,
-                    MimeType = "zip" + i.ToString()
+                    Type = "zip" + i.ToString()
                 });
             }
             

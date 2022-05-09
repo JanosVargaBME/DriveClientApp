@@ -12,6 +12,7 @@ namespace DriveClient.ViewModels
     {
         //CHANGE THIS SHIT
         public List<FileItem> Files => FileItemService.Instance.GetFiles();
+        public List<BasicItem> BasicItems => BasicItemService.Instance.GetThings();
 
         public string URLposition = "/";
 
@@ -19,21 +20,52 @@ namespace DriveClient.ViewModels
 
         public ICommand DeleteCommand { get; set; }
         public ICommand OpenCommand { get; set; }
+        public ICommand AddCommand { get; set; }
+        public ICommand ChangeViewCommand { get; set; }
+        public ICommand BackCommand { get; set; }
 
         public DataListViewModel(INavigation navigation) : base(navigation)
         {
             DeleteCommand = new Command(DeleteCommandExecute);
             OpenCommand = new Command(OpenCommandExecute);
+            AddCommand = new Command(AddCommandExecute);
+            ChangeViewCommand = new Command(ChangeViewCommandExecute);
+            BackCommand = new Command(BackCommandExecute);
         }
 
+        //TODO: Go back to previous folder
+        private void BackCommandExecute(object obj)
+        {
+            URLposition = "/back";
+            this.OnAppearing();
+        }
+
+        //TODO: Change to other view
+        private void ChangeViewCommandExecute(object obj)
+        {
+            URLposition = "/change";
+            this.OnAppearing();
+        }
+
+        //TODO: Add new item to drive
+        private void AddCommandExecute(object obj)
+        {
+            URLposition = "/add";
+            this.OnAppearing();
+        }
+
+        //TODO: Delete file/folder command
         private void DeleteCommandExecute()
         {
-            //TODO: Torolni az adott objektumot
+            URLposition = "/delete";
+            this.OnAppearing();
         }
 
-        private async void OpenCommandExecute()
+        //TODO: Open file/folder command
+        private void OpenCommandExecute()
         {
-            //TODO: Megnyitni az adott oldalt
+            URLposition = "/open";
+            this.OnAppearing();
         }
 
         public override void OnAppearing()
@@ -41,6 +73,7 @@ namespace DriveClient.ViewModels
             base.OnAppearing();
             OnPropertyChanged(nameof(Files));
             OnPropertyChanged(nameof(URLposition));
+            OnPropertyChanged(nameof(FullURLposition));
         }
     }
 }

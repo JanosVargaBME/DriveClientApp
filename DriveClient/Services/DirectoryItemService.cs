@@ -13,22 +13,17 @@ namespace DriveClient.Services
 
         private void dummyDataInit()
         {
-            DirectoryItem di1 = new DirectoryItem
+            for (int i = 100; i < 103; i++)
             {
-                Name = "Mappa",
-                ID = "1",
-                Description = "Ez egy mappa",
-                fullPath = "hello/folder"
-            };
-            DirectoryItem di2 = new DirectoryItem
-            {
-                Name = "Mappa2",
-                ID = "2",
-                Description = "Ez egy mappa2",
-                fullPath = "hello/folder2"
-            };
-            AddDirectory(di1);
-            AddDirectory(di2);
+                AddDirectory(new DirectoryItem
+                {
+                    Name = "Mappa",
+                    ID = i.ToString(),
+                    Description = "Ez egy mappa",
+                    FullPath = "hello/folder",
+                    Type = "Folder",
+                });
+            }
         }
 
         public List<DirectoryItem> GetDirectories()

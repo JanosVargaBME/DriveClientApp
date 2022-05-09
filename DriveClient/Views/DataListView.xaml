@@ -1,7 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:dg="clr-namespace:Xamarin.Forms.DataGrid;assembly=Xamarin.Forms.DataGrid" 
+             xmlns:dg="clr-namespace:Xamarin.Forms.DataGrid;assembly=Xamarin.Forms.DataGrid"
+             xmlns:viewmodels="clr-namespace:DriveClient.ViewModels"
+             x:DataType="viewmodels:DataListViewModel"
              Title="{Binding FullURLposition}"
              BackgroundColor="#333"
              x:Class="DriveClient.Views.DataListView">
@@ -11,11 +13,11 @@
         <Grid>
             <StackLayout Orientation="Vertical">
                 <StackLayout Orientation="Horizontal">
-                    <Button ImageSource="Assets/back_arrow_32.png" BackgroundColor="#333" HorizontalOptions="StartAndExpand"/>
-                    <Button Text="Change to Block view!"    FontSize="Medium" TextColor="White" BackgroundColor="#333" HorizontalOptions="EndAndExpand"/>
+                    <Button ImageSource="Assets/back_arrow_32.png" Command="{Binding BackCommand}" BackgroundColor="#333" HorizontalOptions="StartAndExpand"/>
+                    <Button Text="Change to Block view!" Command="{Binding ChangeViewCommand}" FontSize="Medium" TextColor="White" BackgroundColor="#333" HorizontalOptions="EndAndExpand"/>
                 </StackLayout>
 
-                <dg:DataGrid SelectionEnabled="True" RowHeight="30" HeaderHeight="50" BorderColor="#CCCCCC" HeaderBackground="#333" ActiveRowColor="#8899AA" ItemsSource="{Binding Files}">
+                <dg:DataGrid SelectionEnabled="True" RowHeight="30" HeaderHeight="50" BorderColor="#CCCCCC" HeaderBackground="#333" ActiveRowColor="#8899AA" ItemsSource="{Binding BasicItems}">
                     <x:Arguments>
                         <ListViewCachingStrategy>RetainElement</ListViewCachingStrategy>
                     </x:Arguments>
@@ -33,10 +35,9 @@
                         <dg:ColumnCollection>
                             <dg:DataGridColumn Title="ID"               PropertyName="ID"           Width="*"/>
                             <dg:DataGridColumn Title="Name"             PropertyName="Name"         Width="2*"/>
-                            <dg:DataGridColumn Title="Type"             PropertyName="MimeType"     Width="1*"/>
-                            <dg:DataGridColumn Title="Size(Bytes)"      PropertyName="Size"         Width="1*"/>
-                            <dg:DataGridColumn Title="Created Time"     PropertyName="createdTime"  Width="2*"/>
-                            
+                            <dg:DataGridColumn Title="Type"             PropertyName="Type"         Width="1*"/>
+                            <dg:DataGridColumn Title="Description"      PropertyName="Description"  Width="1*"/>
+                            <dg:DataGridColumn Title="Creation Time"     PropertyName="createdTime"  Width="2*"/>
                             <dg:DataGridColumn Title="Open"             PropertyName="ID"           Width="1*">
                                 <dg:DataGridColumn.CellTemplate>
                                     <DataTemplate>
@@ -75,7 +76,7 @@
                 </dg:DataGrid>
 
                 <StackLayout Orientation="Horizontal">
-                    <Button ImageSource="Assets/upload.png" BackgroundColor="#333" HorizontalOptions="CenterAndExpand"/>
+                    <Button ImageSource="Assets/upload.png" Command="{Binding AddCommand}" BackgroundColor="#333" HorizontalOptions="CenterAndExpand"/>
                 </StackLayout>
                 
             </StackLayout>
