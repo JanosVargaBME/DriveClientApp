@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DriveClient.Views;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -10,7 +11,8 @@ namespace DriveClient
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new MainPage());
+            MainPage = new NavigationPage(new LoginView());
+            //MainPage = new NavigationPage(new DataListView());
         }
 
         protected override void OnStart()

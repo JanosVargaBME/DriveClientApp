@@ -14,20 +14,18 @@ namespace DriveClient.Services
 
         private void dummyDataInit()
         {
-            FileItem f1 = new FileItem
+            for (int i = 1; i < 10; i++)
             {
-                Name = "Fajl1",
-                ID = "1",
-                Description = "Ez egy fajl",
-            };
-            FileItem f2 = new FileItem
-            {
-                Name = "Fajl2",
-                ID = "2",
-                Description = "Ez egy fajl",
-            };
-            AddFile(f1);
-            AddFile(f2);
+                AddFile(new FileItem
+                {
+                    Name = "Fajl" + i.ToString(),
+                    ID = i.ToString(),
+                    Description = "Ez egy fajl" + i.ToString(),
+                    Size = 200,
+                    MimeType = "zip" + i.ToString()
+                });
+            }
+            
         }
         public List<FileItem> GetFiles()
         {

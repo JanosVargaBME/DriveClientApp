@@ -20,7 +20,19 @@ namespace DriveClient.Services
                 password = "jelszo",
                 token = "token"
             };
+            User u2 = new User
+            {
+                username = "felh_nev2",
+                password = "jelszo2",
+                token = "token2"
+            };
             users.Add(u);
+            users.Add(u2);
+        }
+
+        public List<User> GetUsers()
+        {
+            return users;
         }
     }
 }
