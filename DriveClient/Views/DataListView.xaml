@@ -36,13 +36,13 @@
                             <dg:DataGridColumn Title="ID"               PropertyName="ID"           Width="*"/>
                             <dg:DataGridColumn Title="Name"             PropertyName="Name"         Width="2*"/>
                             <dg:DataGridColumn Title="Type"             PropertyName="Type"         Width="1*"/>
-                            <dg:DataGridColumn Title="Description"      PropertyName="Description"  Width="1*"/>
-                            <dg:DataGridColumn Title="Creation Time"     PropertyName="createdTime"  Width="2*"/>
+                            <dg:DataGridColumn Title="Description"      PropertyName="Description"  Width="2*"/>
+                            <dg:DataGridColumn Title="Creation Time"    PropertyName="createdTime"  Width="2*"/>
                             <dg:DataGridColumn Title="Open"             PropertyName="ID"           Width="1*">
                                 <dg:DataGridColumn.CellTemplate>
                                     <DataTemplate>
                                         <ContentView>
-                                            <!-- TODO: BINDING -->
+                                            <!-- TODO: Normal BINDING -->
                                             <StackLayout>
                                                 <Button ImageSource="Assets/open.png" Command="{Binding OpenCommand}" CommandParameter="{Binding .}"></Button>
                                             </StackLayout>
@@ -54,7 +54,7 @@
                                 <dg:DataGridColumn.CellTemplate>
                                     <DataTemplate>
                                         <ContentView>
-                                            <!-- TODO: BINDING -->
+                                            <!-- TODO: Normal BINDING -->
                                             <StackLayout>
                                                 <Button ImageSource="Assets/delete.png" Command="{Binding DeleteCommand}" CommandParameter="{Binding .}"></Button>
                                             </StackLayout>
@@ -65,12 +65,10 @@
                         </dg:ColumnCollection>
                     </dg:DataGrid.Columns>
 
-
-
                     <dg:DataGrid.RowsBackgroundColorPalette>
                         <dg:PaletteCollection>
-                            <Color>#F2F2F2</Color>
-                            <Color>#FFFFFF</Color>
+                            <Color>#aeaeae</Color>
+                            <Color>#909090</Color>
                         </dg:PaletteCollection>
                     </dg:DataGrid.RowsBackgroundColorPalette>
                 </dg:DataGrid>

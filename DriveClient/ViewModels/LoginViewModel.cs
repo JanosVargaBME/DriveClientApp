@@ -25,9 +25,18 @@ namespace DriveClient.ViewModels
 
         private async void LoginCommandExecute()
         {
+            /*
             LoginButtonText = "You are logged in!";
             OnPropertyChanged(nameof(LoginButtonText));
             await Navigation.PushAsync(new DataListView(), true);
+            */
+
+            OwnDriveService ownDriveService = new OwnDriveService();
+
+            
+            LoginButtonText = ownDriveService.read().ToString();
+            OnPropertyChanged(nameof(LoginButtonText));
+
         }
 
         public override void OnAppearing()

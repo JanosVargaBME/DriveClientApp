@@ -10,8 +10,6 @@ namespace DriveClient.ViewModels
 {
     internal class DataListViewModel : BaseViewModel
     {
-        //CHANGE THIS SHIT
-        public List<FileItem> Files => FileItemService.Instance.GetFiles();
         public List<BasicItem> BasicItems => BasicItemService.Instance.GetThings();
 
         public string URLposition = "/";
@@ -71,7 +69,7 @@ namespace DriveClient.ViewModels
         public override void OnAppearing()
         {
             base.OnAppearing();
-            OnPropertyChanged(nameof(Files));
+            OnPropertyChanged(nameof(BasicItems));
             OnPropertyChanged(nameof(URLposition));
             OnPropertyChanged(nameof(FullURLposition));
         }

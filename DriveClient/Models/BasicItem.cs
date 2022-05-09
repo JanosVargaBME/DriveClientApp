@@ -29,15 +29,5 @@ namespace DriveClient.Models
         /// The time the file was created, this is a property of the file taken from the API data.
         /// </summary>
         public DateTime createdTime { get; set; } = DateTime.Now;
-
-        /*
-        public BasicItem(string _ID, string _Name, string _Desc, string _Type, DateTime _created)
-        {
-            ID = _ID;
-            Name = _Name;
-            Description = _Desc;
-            Type = _Type;
-            createdTime = _created;
-        }*/
     }
 }

@@ -18,13 +18,5 @@ namespace DriveClient.Models
         /// Number of files in this directory.
         /// </summary>
         public int FileCount { get; set; } = 0;
-
-        /*
-        public DirectoryItem(string _ID, string _Name, string _Desc, string _Type, DateTime _created, string _fullpath, int _fileCount)
-            : base(_ID, _Name, _Desc, _Type, _created)
-        {
-            FullPath = _ID;
-            FileCount = _fileCount;
-        }*/
     }
 }
