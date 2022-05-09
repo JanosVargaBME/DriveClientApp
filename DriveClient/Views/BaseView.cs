@@ -6,5 +6,6 @@ namespace DriveClient.Views
 {
     internal class BaseView
     {
+
     }
 }
