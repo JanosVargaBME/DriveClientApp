@@ -19,21 +19,15 @@ namespace DriveClient.Services
         public async Task<bool> IsValidLogin(string token)
         {
             accessToken = token;
-
-            try
+            using (var db = new DropboxClient(accessToken))
             {
-                using (var db = new DropboxClient(accessToken))
-                {
-                    var id = await db.Users.GetCurrentAccountAsync();
+                var id = await db.Users.GetCurrentAccountAsync();
 
-                    actualUser = id.Name.DisplayName;
-                }
+                actualUser = id.Name.DisplayName;
+            }
+
+            if(actualUser != "")
                 return true;
-            }
-            catch (Exception)
-            {
-                actualUser = "";
-            }
 
             return false;
         }

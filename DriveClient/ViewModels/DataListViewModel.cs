@@ -13,10 +13,18 @@ namespace DriveClient.ViewModels
 {
     internal class DataListViewModel : BaseViewModel
     {
+        /// <summary>
+        /// Contains the file and directory objects listed in the grid.
+        /// </summary>
         public ObservableCollection<BasicItem> BasicItems{ get; set; }
-
+        /// <summary>
+        /// Displays the actual path of the current directory.
+        /// </summary>
         public string FullURLposition { get { return "Your current position: " + BasicItemService.Instance.actualPath; } }
 
+        /// <summary>
+        /// ICommand objects for the buttons.
+        /// </summary>
         public ICommand DeleteCommand { get; set; }
         public ICommand OpenCommand { get; set; }
         public ICommand AddCommand { get; set; }
@@ -27,13 +35,18 @@ namespace DriveClient.ViewModels
         {
             LoadData(string.Empty);
 
-            DeleteCommand = new Command(DeleteCommandExecute);
-            OpenCommand = new Command(OpenCommandExecute);
-            AddCommand = new Command(AddCommandExecute);
-            ChangeViewCommand = new Command(ChangeViewCommandExecute);
-            BackCommand = new Command(BackCommandExecute);
+            DeleteCommand       = new Command(DeleteCommandExecute);
+            OpenCommand         = new Command(OpenCommandExecute);
+            AddCommand          = new Command(AddCommandExecute);
+            ChangeViewCommand   = new Command(ChangeViewCommandExecute);
+            BackCommand         = new Command(BackCommandExecute);
         }
 
+        /// <summary>
+        /// Initializes the Basicitems container and the actual path.
+        /// </summary>
+        /// <param name="path">Loads files from this path.</param>
+        /// <returns>-</returns>
         public async Task LoadData(string path)
         {
             var data = await BasicItemService.Instance.InitList(path);
@@ -42,7 +55,10 @@ namespace DriveClient.ViewModels
             this.OnAppearing();
         }
 
-        //DONE
+        /// <summary>
+        /// Responsible for the Back button, reinitializes the containers and the actual path variable from the previous actual path.
+        /// </summary>
+        /// <param name="obj"></param>
         private async void BackCommandExecute(object obj)
         {
             string path = BasicItemService.Instance.actualPath;

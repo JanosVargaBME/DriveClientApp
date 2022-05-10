@@ -2,14 +2,10 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              Title = "Login"
+             xmlns:viewmodels="clr-namespace:DriveClient.ViewModels"
+             x:DataType="viewmodels:LoginViewModel"
              BackgroundColor="#333"
              x:Class="DriveClient.Views.LoginView">
-
-    <ContentPage.Padding>
-        <OnPlatform x:TypeArguments="Thickness">
-            <On Platform="iOS" Value="0,20,0,0" />
-        </OnPlatform>
-    </ContentPage.Padding>
 
     <Grid
         RowSpacing="0"
@@ -25,7 +21,7 @@
         <Label
             Grid.Row="0"
             FontSize="Title"
-            Text="Welcome to DriveClient!"
+            Text="{Binding WelcomeText}"
             TextColor="White"
             HorizontalOptions="Center"
             VerticalOptions="Center" />
@@ -50,7 +46,9 @@
                     HorizontalOptions="Center"
                     />
                 <Entry 
-                    Text="" 
+                    Text=""
+                    x:Name="email"
+                    Placeholder="Email"
                     Keyboard="Email"
                     TextColor="Black"
                     BackgroundColor="white"
@@ -60,16 +58,22 @@
 
             <StackLayout HorizontalOptions="Center" Spacing="10">
                 <Label 
-                    Text="Password"
+                    Text="Token"
                     FontSize="Subtitle"
                     HorizontalOptions="Center"
                     />
                 <Entry 
+                    Placeholder="Token"
+                    
+                    Text="{Binding TokenText, Mode=TwoWay}"
+                    
                     WidthRequest="300"
                     TextColor="Black"
                     BackgroundColor="white"
                     HorizontalOptions="Center"
-                    IsPassword="True" />
+                    IsPassword="False" />
+                
+                
             </StackLayout>
 
             <Button

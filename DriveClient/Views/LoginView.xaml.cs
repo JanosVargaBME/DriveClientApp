@@ -23,6 +23,8 @@ namespace DriveClient.Views
         {
             base.OnAppearing();
             (this.BindingContext as LoginViewModel).OnAppearing();
+
+            
         }
     }
 }
