@@ -8,8 +8,7 @@
              BackgroundColor="#333"
              x:Class="DriveClient.Views.DataListView">
 
-    
-    <ContentView>
+    <ContentView x:Name="self">
         <Grid>
             <StackLayout Orientation="Vertical">
                 <StackLayout Orientation="Horizontal">
@@ -17,7 +16,9 @@
                     <Button Text="Change to Block view!" Command="{Binding ChangeViewCommand}" FontSize="Medium" TextColor="White" BackgroundColor="#333" HorizontalOptions="EndAndExpand"/>
                 </StackLayout>
 
-                <dg:DataGrid SelectionEnabled="True" RowHeight="30" HeaderHeight="50" BorderColor="#CCCCCC" HeaderBackground="#333" ActiveRowColor="#8899AA" ItemsSource="{Binding BasicItems}">
+                <dg:DataGrid x:Name="dataGridView"
+                             ItemSelected="dataGridView_ItemClick"
+                             SelectionEnabled="True" RowHeight="30" HeaderHeight="50" BorderColor="#CCCCCC" HeaderBackground="#333" ActiveRowColor="#8899AA" ItemsSource="{Binding BasicItems}" >
                     <x:Arguments>
                         <ListViewCachingStrategy>RetainElement</ListViewCachingStrategy>
                     </x:Arguments>
@@ -44,19 +45,29 @@
                                         <ContentView>
                                             <!-- TODO: Normal BINDING -->
                                             <StackLayout>
-                                                <Button ImageSource="Assets/open.png" Command="{Binding OpenCommand}" CommandParameter="{Binding .}"></Button>
+                                                <Button ImageSource="Assets/open.png" 
+                                                        Command="{Binding Source={x:Reference dataGridView}, Path=BindingContext.OpenCommand}"
+                                                        CommandParameter="{Binding .}">
+                                                    
+                                                </Button>
                                             </StackLayout>
                                         </ContentView>
                                     </DataTemplate>
                                 </dg:DataGridColumn.CellTemplate>
                             </dg:DataGridColumn>
-                            <dg:DataGridColumn Title="Delete"           PropertyName="ID"           Width="*">
+                            
+                            <dg:DataGridColumn Title="Delete"           PropertyName="ID"        Width="*">
                                 <dg:DataGridColumn.CellTemplate>
                                     <DataTemplate>
                                         <ContentView>
                                             <!-- TODO: Normal BINDING -->
                                             <StackLayout>
-                                                <Button ImageSource="Assets/delete.png" Command="{Binding DeleteCommand}" CommandParameter="{Binding .}"></Button>
+                                                <Button ImageSource="Assets/delete.png" 
+                                                       
+                                                        Command="{Binding Source={x:Reference self}, Path=BindingContext.DeleteCommand}"
+                                                        CommandParameter="{Binding .}">
+                                                    
+                                                </Button>
                                             </StackLayout>
                                         </ContentView>
                                     </DataTemplate>

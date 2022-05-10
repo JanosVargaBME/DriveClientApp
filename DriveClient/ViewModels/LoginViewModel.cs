@@ -43,7 +43,7 @@ namespace DriveClient.ViewModels
         /// </summary>
         private async void TestLoginCommandExecute()
         {
-            string testToken = "sl.BHWWMwTSWxwBJZUazDh-6PFbe11f2J88Tc0jDnMTkAeJJ-81s74VEZSeQxnTEDEeM3OwBd9wFNtQ5xcRcCybvm29H8BushB1X3Fo_CoMukUn8zqjtCRPMq2D2gyu5TzMPTLlZqI_i66N";
+            string testToken = "sl.BHWqan6ZZ8SAHhLEQnHxd76V9HgDjGajmR1KKIGJd_4Y2GotHD36u03TLGSdfMRuJYxA4U9jv30uCh0jktlTa2KnfOEcMTJtM3EcUVII_5emsazh8eu0TuWCXSOHoJg6RO_YzKRdAz1j";
 
             try
             {

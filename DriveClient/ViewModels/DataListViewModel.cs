@@ -36,7 +36,7 @@ namespace DriveClient.ViewModels
         {
             LoadData(string.Empty);
 
-            DeleteCommand       = new Command(DeleteCommandExecute);
+            DeleteCommand       = new Command<string>(DeleteCommandExecute);
             OpenCommand         = new Command(OpenCommandExecute);
             AddCommand          = new Command(AddCommandExecute);
             ChangeViewCommand   = new Command(ChangeViewCommandExecute);
@@ -115,14 +115,16 @@ namespace DriveClient.ViewModels
 
 
         //TODO: Delete file/folder command
-        private void DeleteCommandExecute()
+        private async void DeleteCommandExecute(object obj)
         {
+            await App.Current.MainPage.DisplayAlert("Error", " There was an error with: ", "OK");
             this.OnAppearing();
         }
 
         //TODO: Open file/folder command
-        private void OpenCommandExecute()
+        private async void OpenCommandExecute()
         {
+            await App.Current.MainPage.DisplayAlert("Error", " There was an error with: ", "OK");
             this.OnAppearing();
         }
 

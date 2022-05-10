@@ -24,5 +24,10 @@ namespace DriveClient.Views
             base.OnAppearing();
             (this.BindingContext as DataListViewModel).OnAppearing();
         }
+
+        private async void dataGridView_ItemClick(object sender, SelectableItemsView e)
+        {
+
+        }
     }
 }
