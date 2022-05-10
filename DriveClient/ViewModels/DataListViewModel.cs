@@ -2,7 +2,9 @@
 using DriveClient.Services;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -10,7 +12,7 @@ namespace DriveClient.ViewModels
 {
     internal class DataListViewModel : BaseViewModel
     {
-        public List<BasicItem> BasicItems => BasicItemService.Instance.GetThings();
+        public ObservableCollection<BasicItem> BasicItems{ get; set; }
 
         public string URLposition = "/";
 
@@ -24,6 +26,8 @@ namespace DriveClient.ViewModels
 
         public DataListViewModel(INavigation navigation) : base(navigation)
         {
+            LoadData();
+
             DeleteCommand = new Command(DeleteCommandExecute);
             OpenCommand = new Command(OpenCommandExecute);
             AddCommand = new Command(AddCommandExecute);
@@ -31,38 +35,41 @@ namespace DriveClient.ViewModels
             BackCommand = new Command(BackCommandExecute);
         }
 
-        //TODO: Go back to previous folder
-        private void BackCommandExecute(object obj)
+        public async Task LoadData()
         {
-            URLposition = "/back";
+            var data = await BasicItemService.Instance.GetThings();
+            BasicItems = new ObservableCollection<BasicItem>(data);
+            this.OnAppearing();
+        }
+
+
+        //TODO: Go back to previous folder
+        private async void BackCommandExecute(object obj)
+        {
             this.OnAppearing();
         }
 
         //TODO: Change to other view
         private void ChangeViewCommandExecute(object obj)
         {
-            URLposition = "/change";
             this.OnAppearing();
         }
 
         //TODO: Add new item to drive
         private void AddCommandExecute(object obj)
         {
-            URLposition = "/add";
             this.OnAppearing();
         }
 
         //TODO: Delete file/folder command
         private void DeleteCommandExecute()
         {
-            URLposition = "/delete";
             this.OnAppearing();
         }
 
         //TODO: Open file/folder command
         private void OpenCommandExecute()
         {
-            URLposition = "/open";
             this.OnAppearing();
         }
 

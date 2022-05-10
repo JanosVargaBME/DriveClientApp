@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace DriveClient.Services
 {
@@ -11,17 +12,18 @@ namespace DriveClient.Services
         private List<BasicItem> basicItems = new List<BasicItem>();
         public static BasicItemService Instance { get; private set; } = new BasicItemService();
 
-        public void initList()
+        public async Task initList()
         {
             basicItems = new List<BasicItem>();
 
-            basicItems.AddRange(DirectoryItemService.Instance.GetDirectories());
-            basicItems.AddRange(FileItemService.Instance.GetFiles());
+            var directories = await DropBoxService.Instance.GetDirectories(string.Empty);
+
+            basicItems.AddRange(directories);
         }
 
-        public List<BasicItem> GetThings()
+        public async Task<List<BasicItem>> GetThings()
         {
-            initList();
+            await initList();
             return basicItems;
         }
     }

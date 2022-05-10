@@ -14,28 +14,40 @@ namespace DriveClient.ViewModels
         //CHANGE THIS SHIT
         public List<User> Users => UserService.Instance.GetUsers();
 
-        public string LoginButtonText { get; set; } = "Log in!"; 
-
         public ICommand LoginCommand { get; set; }
+        public ICommand TestLoginCommand { get; set; }
 
         public LoginViewModel(INavigation navigation) : base(navigation)
         {
             LoginCommand = new Command(LoginCommandExecute);
+            TestLoginCommand = new Command(TestLoginCommandExecute);
+        }
+
+        private async void TestLoginCommandExecute(object obj)
+        {
+            string testToken = "sl.BHUrsfcesPCG2ZFUSS_7hvikq03WA3R8_JlN_-A64XayTevcW9G5BeceEjxdCVSE4hODfqfKBHJSutsWg3vDhmRAxz-xEsEWtSSu_dqIK-pXG1d_tYS7jORdU5D1nuICVi_fMy0ximDU";
+
+            if(await DropBoxService.Instance.IsValidLogin(testToken))
+            {
+                await Navigation.PushAsync(new DataListView(), true);
+            }
         }
 
         private async void LoginCommandExecute()
         {
-            
-            LoginButtonText = "You are logged in!";
-            OnPropertyChanged(nameof(LoginButtonText));
-            await Navigation.PushAsync(new DataListView(), true);
+            //TODO: Get token from input
+            string token = "";
+
+            if (await DropBoxService.Instance.IsValidLogin(token))
+            {
+                await Navigation.PushAsync(new DataListView(), true);
+            }
         }
 
         public override void OnAppearing()
         {
             base.OnAppearing();
             OnPropertyChanged(nameof(Users));
-            OnPropertyChanged(nameof(LoginButtonText));
         }
     }
 }

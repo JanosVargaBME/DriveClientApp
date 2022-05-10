@@ -33,12 +33,12 @@
 
                     <dg:DataGrid.Columns>
                         <dg:ColumnCollection>
-                            <dg:DataGridColumn Title="ID"               PropertyName="ID"           Width="*"/>
+                            <dg:DataGridColumn Title="ID"               PropertyName="ID"           Width="2*"/>
                             <dg:DataGridColumn Title="Name"             PropertyName="Name"         Width="2*"/>
                             <dg:DataGridColumn Title="Type"             PropertyName="Type"         Width="1*"/>
                             <dg:DataGridColumn Title="Description"      PropertyName="Description"  Width="2*"/>
                             <dg:DataGridColumn Title="Creation Time"    PropertyName="createdTime"  Width="2*"/>
-                            <dg:DataGridColumn Title="Open"             PropertyName="ID"           Width="1*">
+                            <dg:DataGridColumn Title="Open"             PropertyName="ID"           Width="*">
                                 <dg:DataGridColumn.CellTemplate>
                                     <DataTemplate>
                                         <ContentView>
@@ -50,7 +50,7 @@
                                     </DataTemplate>
                                 </dg:DataGridColumn.CellTemplate>
                             </dg:DataGridColumn>
-                            <dg:DataGridColumn Title="Delete"           PropertyName="ID"           Width="1*">
+                            <dg:DataGridColumn Title="Delete"           PropertyName="ID"           Width="*">
                                 <dg:DataGridColumn.CellTemplate>
                                     <DataTemplate>
                                         <ContentView>
