@@ -38,15 +38,37 @@ namespace DriveClient.Services
             return false;
         }
 
-        public async Task<List<DirectoryItem>> GetDirectories(string path)
+        public async Task<List<FileItem>> GetFiles(string actualPath)
+        {
+            List<FileItem> files = new List<FileItem>();
+
+            using (var db = new DropboxClient(accessToken))
+            {
+                var list = await db.Files.ListFolderAsync(actualPath);
+
+                foreach (var f in list.Entries.Where(i => i.IsFile))
+                {
+                    files.Add(new FileItem
+                    {
+                        ID = f.AsFile.Id,
+                        Name = f.AsFile.Name,
+                        createdTime = f.AsFile.ServerModified,
+                        ModifiedTime = f.AsFile.ClientModified,
+                        Size = (long)f.AsFile.Size,
+                        Type = f.AsFile.MediaInfo?.ToString() ?? "Not photo/video"
+                    });
+                }
+            }
+            return files;
+        }
+
+        public async Task<List<DirectoryItem>> GetDirectories(string actualPath)
         {
             List<DirectoryItem> directories = new List<DirectoryItem>();
 
             using (var db = new DropboxClient(accessToken))
             {
-                var list = await db.Files.ListFolderAsync(path);
-
-                //Good til this point
+                var list = await db.Files.ListFolderAsync(actualPath);
 
                 foreach (var file in list.Entries.Where(i => i.IsFolder))
                 {

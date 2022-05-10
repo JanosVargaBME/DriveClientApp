@@ -25,11 +25,12 @@ namespace DriveClient.ViewModels
 
         private async void TestLoginCommandExecute(object obj)
         {
-            string testToken = "sl.BHUrsfcesPCG2ZFUSS_7hvikq03WA3R8_JlN_-A64XayTevcW9G5BeceEjxdCVSE4hODfqfKBHJSutsWg3vDhmRAxz-xEsEWtSSu_dqIK-pXG1d_tYS7jORdU5D1nuICVi_fMy0ximDU";
+            string testToken = "sl.BHXyjOoCK77McXEiRCVO65DaVRiYm_VZ6BlNM6ZaX1r2udWeSn-blrftCiIYBtY6MDDuXqOvQNXJgIx1Lpy_PGgmk3PO7MXoYSXId4TiF2cvCifAj0F59FD4xMiVKNayaKg4_OqZWwJs";
 
             if(await DropBoxService.Instance.IsValidLogin(testToken))
             {
                 await Navigation.PushAsync(new DataListView(), true);
+                
             }
         }
 

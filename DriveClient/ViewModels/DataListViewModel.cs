@@ -3,6 +3,7 @@ using DriveClient.Services;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -14,9 +15,7 @@ namespace DriveClient.ViewModels
     {
         public ObservableCollection<BasicItem> BasicItems{ get; set; }
 
-        public string URLposition = "/";
-
-        public string FullURLposition { get { return "Your current position: " + URLposition; } }
+        public string FullURLposition { get { return "Your current position: " + BasicItemService.Instance.actualPath; } }
 
         public ICommand DeleteCommand { get; set; }
         public ICommand OpenCommand { get; set; }
@@ -26,7 +25,7 @@ namespace DriveClient.ViewModels
 
         public DataListViewModel(INavigation navigation) : base(navigation)
         {
-            LoadData();
+            LoadData(string.Empty);
 
             DeleteCommand = new Command(DeleteCommandExecute);
             OpenCommand = new Command(OpenCommandExecute);
@@ -35,18 +34,31 @@ namespace DriveClient.ViewModels
             BackCommand = new Command(BackCommandExecute);
         }
 
-        public async Task LoadData()
+        public async Task LoadData(string path)
         {
-            var data = await BasicItemService.Instance.GetThings();
+            var data = await BasicItemService.Instance.InitList(path);
             BasicItems = new ObservableCollection<BasicItem>(data);
+
             this.OnAppearing();
         }
 
-
-        //TODO: Go back to previous folder
+        //DONE
         private async void BackCommandExecute(object obj)
         {
-            this.OnAppearing();
+            string path = BasicItemService.Instance.actualPath;
+
+            int freq = path.Count(p => (p == '/'));
+            if (freq > 0)
+            {
+                if(freq == 1)
+                    await LoadData(string.Empty);
+                else {
+                    int index = path.LastIndexOf('/');
+                    path = path.Substring(0, index);
+
+                    await LoadData(path);
+                }
+            }
         }
 
         //TODO: Change to other view
@@ -77,7 +89,6 @@ namespace DriveClient.ViewModels
         {
             base.OnAppearing();
             OnPropertyChanged(nameof(BasicItems));
-            OnPropertyChanged(nameof(URLposition));
             OnPropertyChanged(nameof(FullURLposition));
         }
     }

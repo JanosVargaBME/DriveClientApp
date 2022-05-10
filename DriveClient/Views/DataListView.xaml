@@ -36,7 +36,7 @@
                             <dg:DataGridColumn Title="ID"               PropertyName="ID"           Width="2*"/>
                             <dg:DataGridColumn Title="Name"             PropertyName="Name"         Width="2*"/>
                             <dg:DataGridColumn Title="Type"             PropertyName="Type"         Width="1*"/>
-                            <dg:DataGridColumn Title="Description"      PropertyName="Description"  Width="2*"/>
+                            <dg:DataGridColumn Title="Size(Bytes)"      PropertyName="Size"         Width="1*"/>
                             <dg:DataGridColumn Title="Creation Time"    PropertyName="createdTime"  Width="2*"/>
                             <dg:DataGridColumn Title="Open"             PropertyName="ID"           Width="*">
                                 <dg:DataGridColumn.CellTemplate>

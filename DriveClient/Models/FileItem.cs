@@ -10,11 +10,6 @@ namespace DriveClient.Models
     public class FileItem : BasicItem
     {
         /// <summary>
-        /// In Bytes!!!!
-        /// The size property of the file taken from the API data.
-        /// </summary>
-        public long Size { get; set; } = 0;
-        /// <summary>
         /// The mimeType property of the file taken from the API data, stores the type of data like: 'file_type/specific_type'.
         /// For example: video/mpeg, image/jpeg
         /// </summary>

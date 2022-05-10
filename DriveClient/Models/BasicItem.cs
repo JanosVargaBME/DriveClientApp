@@ -29,5 +29,10 @@ namespace DriveClient.Models
         /// The time the file was created, this is a property of the file taken from the API data.
         /// </summary>
         public DateTime createdTime { get; set; } = DateTime.Now;
+        /// <summary>
+        /// In Bytes!!!!
+        /// The size property of the file taken from the API data.
+        /// </summary>
+        public long Size { get; set; } = 0;
     }
 }
