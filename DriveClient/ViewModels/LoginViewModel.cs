@@ -1,9 +1,6 @@
-﻿using DriveClient.Models;
-using DriveClient.Services;
+﻿using DriveClient.Services;
 using DriveClient.Views;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -46,7 +43,7 @@ namespace DriveClient.ViewModels
         /// </summary>
         private async void TestLoginCommandExecute()
         {
-            string testToken = "sl.BHX0m0dZ1DZYGMEA7qBQTASbOlKFOQWbV9E4oyGGurLCqA57dNSektf7xvf6H4arXWpaWI1zvM1tGVmyfC4JwZi02HM81-0klNovwy9MxXW0Fm05mi70C0dER8jBGORyX8n0PKdyUKdy";
+            string testToken = "sl.BHWWMwTSWxwBJZUazDh-6PFbe11f2J88Tc0jDnMTkAeJJ-81s74VEZSeQxnTEDEeM3OwBd9wFNtQ5xcRcCybvm29H8BushB1X3Fo_CoMukUn8zqjtCRPMq2D2gyu5TzMPTLlZqI_i66N";
 
             try
             {
@@ -56,7 +53,7 @@ namespace DriveClient.ViewModels
                 }
             }catch (Exception)
             {
-                WelcomeText = "There was an error with Logging in, try again!";
+                await App.Current.MainPage.DisplayAlert("Error", "There was an error with Logging in, try again!", "OK");
             }
             finally
             {
@@ -73,7 +70,7 @@ namespace DriveClient.ViewModels
         {
             if (TokenText.Equals(string.Empty))
             {
-                WelcomeText = "Please fill the token input!";
+                await App.Current.MainPage.DisplayAlert("Error", "Please fill the token input!", "OK");
                 this.OnAppearing();
                 return;
             }
@@ -86,7 +83,7 @@ namespace DriveClient.ViewModels
             }
             catch (Exception)
             {
-                WelcomeText = "There was an error with Logging in, try again!";
+                await App.Current.MainPage.DisplayAlert("Error", "There was an error with Logging in, try again!", "OK");
             }
             finally
             {

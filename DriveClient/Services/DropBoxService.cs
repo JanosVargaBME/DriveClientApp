@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DriveClient.Models;
 using Dropbox.Api;
+using Dropbox.Api.Files;
 
 namespace DriveClient.Services
 {
@@ -79,6 +81,16 @@ namespace DriveClient.Services
             }
             return directories;
         }
-        
+
+        public async Task<bool> UploadFile(string name, Stream stream)
+        {
+            using (var dbx = new DropboxClient(accessToken))
+            {
+
+                var response = await dbx.Files.UploadAsync(BasicItemService.Instance.actualPath + "/" + name, WriteMode.Overwrite.Instance, body: stream);
+
+                return true;
+            }
+        }
     }
 }

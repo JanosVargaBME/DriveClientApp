@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using Xamarin.Essentials;
 using Xamarin.Forms;
 
 namespace DriveClient.ViewModels
@@ -77,17 +78,41 @@ namespace DriveClient.ViewModels
             }
         }
 
-        //TODO: Change to other view
-        private void ChangeViewCommandExecute(object obj)
+        /// <summary>
+        /// Responsible for uploading a file to the actual path.
+        /// Opens Filepicker and the user must pick the file he wants to upload.
+        /// Calls the DropBoxService's UploadFile function.
+        /// </summary>
+        /// <param name="obj"></param>
+        private async void AddCommandExecute(object obj)
         {
+            try
+            {
+                var result = await FilePicker.PickAsync();
+                if(result != null)
+                {
+                    var stream = await result.OpenReadAsync();
+
+                    await DropBoxService.Instance.UploadFile(result.FileName, stream);
+
+                    await App.Current.MainPage.DisplayAlert("Success!", $"File: {result.FileName} uploaded!", "OK");
+                }
+            }catch(Exception)
+            {
+                await App.Current.MainPage.DisplayAlert("Error", "There was an error with: opening file!", "OK");
+            }
+            finally {
+                await LoadData(BasicItemService.Instance.actualPath);
+            }
+        }
+
+        //TODO: Change to other view
+        private async void ChangeViewCommandExecute(object obj)
+        {
+            await App.Current.MainPage.DisplayAlert("Error", "There was an error with: ", "OK");
             this.OnAppearing();
         }
 
-        //TODO: Add new item to drive
-        private void AddCommandExecute(object obj)
-        {
-            this.OnAppearing();
-        }
 
         //TODO: Delete file/folder command
         private void DeleteCommandExecute()
