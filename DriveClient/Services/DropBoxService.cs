@@ -51,7 +51,7 @@ namespace DriveClient.Services
                         createdTime = f.AsFile.ServerModified,
                         ModifiedTime = f.AsFile.ClientModified,
                         Size = (long)f.AsFile.Size,
-                        Type = f.AsFile.MediaInfo?.ToString() ?? "Not photo/video"
+                        Type = "Assets/File.png"
                     });
                 }
             }
@@ -75,7 +75,7 @@ namespace DriveClient.Services
                         FullPath = file.AsFolder.PathDisplay,
                         createdTime = DateTime.Now,
                         FileCount = 0,
-                        Type = "Folder",
+                        Type = "Assets/Folder.png",
                     });
                 }
             }

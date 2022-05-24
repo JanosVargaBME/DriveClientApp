@@ -1,4 +1,6 @@
-﻿using DriveClient.ViewModels;
+﻿using DriveClient.Models;
+using DriveClient.Services;
+using DriveClient.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,9 +27,35 @@ namespace DriveClient.Views
             (this.BindingContext as DataListViewModel).OnAppearing();
         }
 
-        private async void dataGridView_ItemClick(object sender, SelectableItemsView e)
+        private void MenuItem_Clicked_Open(object sender, EventArgs e)
         {
+            var mi = sender as MenuItem;
 
+            BasicItem bi = (BasicItem)mi.CommandParameter;
+
+            if(bi != null)
+            {
+                if (bi.Type.Contains("Folder"))
+                    (this.BindingContext as DataListViewModel).LoadData(((DirectoryItem)bi).FullPath);
+            }
+        }
+
+        private void MenuItem_Clicked_Download(object sender, EventArgs e)
+        {
+            var mi = sender as MenuItem;
+
+            BasicItem bi = (BasicItem)mi.CommandParameter;
+
+            BasicItemService.Instance.DownloadBasicItem(bi);
+        }
+
+        private void MenuItem_Clicked_Delete(object sender, EventArgs e)
+        {
+            var mi = sender as MenuItem;
+
+            BasicItem bi = (BasicItem)mi.CommandParameter;
+
+            BasicItemService.Instance.DeleteBasicItem(bi);
         }
     }
 }

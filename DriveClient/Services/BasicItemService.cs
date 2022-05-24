@@ -30,5 +30,15 @@ namespace DriveClient.Services
 
             return basicItems;
         }
+
+        public async Task DeleteBasicItem(BasicItem basicItem)
+        {
+
+        }
+
+        internal void DownloadBasicItem(BasicItem bi)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

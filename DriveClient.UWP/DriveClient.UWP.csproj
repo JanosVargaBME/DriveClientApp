@@ -107,6 +107,8 @@
     <Content Include="Assets\back_arrow.png" />
     <Content Include="Assets\back_arrow_32.png" />
     <Content Include="Assets\delete.png" />
+    <Content Include="Assets\File.png" />
+    <Content Include="Assets\Folder.png" />
     <Content Include="Assets\LargeTile.scale-100.png" />
     <Content Include="Assets\LargeTile.scale-200.png" />
     <Content Include="Assets\LargeTile.scale-400.png" />

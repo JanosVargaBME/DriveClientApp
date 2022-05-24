@@ -1,96 +1,61 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:dg="clr-namespace:Xamarin.Forms.DataGrid;assembly=Xamarin.Forms.DataGrid"
-             xmlns:viewmodels="clr-namespace:DriveClient.ViewModels"
-             x:DataType="viewmodels:DataListViewModel"
              Title="{Binding FullURLposition}"
              BackgroundColor="#333"
              x:Class="DriveClient.Views.DataListView">
 
-    <ContentView x:Name="self">
-        <Grid>
-            <StackLayout Orientation="Vertical">
-                <StackLayout Orientation="Horizontal">
-                    <Button ImageSource="Assets/back_arrow_32.png" Command="{Binding BackCommand}" BackgroundColor="#333" HorizontalOptions="StartAndExpand"/>
-                    <Button Text="Change to Block view!" Command="{Binding ChangeViewCommand}" FontSize="Medium" TextColor="White" BackgroundColor="#333" HorizontalOptions="EndAndExpand"/>
-                </StackLayout>
+    <ContentPage.Content>
 
-                <dg:DataGrid x:Name="dataGridView"
-                             ItemSelected="dataGridView_ItemClick"
-                             SelectionEnabled="True" RowHeight="30" HeaderHeight="50" BorderColor="#CCCCCC" HeaderBackground="#333" ActiveRowColor="#8899AA" ItemsSource="{Binding BasicItems}" >
-                    <x:Arguments>
-                        <ListViewCachingStrategy>RetainElement</ListViewCachingStrategy>
-                    </x:Arguments>
+        <StackLayout>
 
-                    <dg:DataGrid.HeaderLabelStyle>
-                        <Style TargetType="Label">
-                            <Setter Property="HorizontalTextAlignment" Value="Center"/>
-                            <Setter Property="FontSize" Value="25" />
-                            <Setter Property="TextColor" Value="White" />
-                            <Setter Property="Padding" Value="5" />
-                        </Style>
-                    </dg:DataGrid.HeaderLabelStyle>
-
-                    <dg:DataGrid.Columns>
-                        <dg:ColumnCollection>
-                            <dg:DataGridColumn Title="ID"               PropertyName="ID"           Width="2*"/>
-                            <dg:DataGridColumn Title="Name"             PropertyName="Name"         Width="2*"/>
-                            <dg:DataGridColumn Title="Type"             PropertyName="Type"         Width="1*"/>
-                            <dg:DataGridColumn Title="Size(Bytes)"      PropertyName="Size"         Width="1*"/>
-                            <dg:DataGridColumn Title="Creation Time"    PropertyName="createdTime"  Width="2*"/>
-                            <dg:DataGridColumn Title="Open"             PropertyName="ID"           Width="*">
-                                <dg:DataGridColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <ContentView>
-                                            <!-- TODO: Normal BINDING -->
-                                            <StackLayout>
-                                                <Button ImageSource="Assets/open.png" 
-                                                        Command="{Binding Source={x:Reference dataGridView}, Path=BindingContext.OpenCommand}"
-                                                        CommandParameter="{Binding .}">
-                                                    
-                                                </Button>
-                                            </StackLayout>
-                                        </ContentView>
-                                    </DataTemplate>
-                                </dg:DataGridColumn.CellTemplate>
-                            </dg:DataGridColumn>
-                            
-                            <dg:DataGridColumn Title="Delete"           PropertyName="ID"        Width="*">
-                                <dg:DataGridColumn.CellTemplate>
-                                    <DataTemplate>
-                                        <ContentView>
-                                            <!-- TODO: Normal BINDING -->
-                                            <StackLayout>
-                                                <Button ImageSource="Assets/delete.png" 
-                                                       
-                                                        Command="{Binding Source={x:Reference self}, Path=BindingContext.DeleteCommand}"
-                                                        CommandParameter="{Binding .}">
-                                                    
-                                                </Button>
-                                            </StackLayout>
-                                        </ContentView>
-                                    </DataTemplate>
-                                </dg:DataGridColumn.CellTemplate>
-                            </dg:DataGridColumn>
-                        </dg:ColumnCollection>
-                    </dg:DataGrid.Columns>
-
-                    <dg:DataGrid.RowsBackgroundColorPalette>
-                        <dg:PaletteCollection>
-                            <Color>#aeaeae</Color>
-                            <Color>#909090</Color>
-                        </dg:PaletteCollection>
-                    </dg:DataGrid.RowsBackgroundColorPalette>
-                </dg:DataGrid>
-
-                <StackLayout Orientation="Horizontal">
-                    <Button ImageSource="Assets/upload.png" Command="{Binding AddCommand}" BackgroundColor="#333" HorizontalOptions="CenterAndExpand"/>
-                </StackLayout>
-                
+            <StackLayout Orientation="Horizontal">
+                <!-- Button to get back to the parent folder -->
+                <Button ImageSource="Assets/back_arrow_32.png" Command="{Binding BackCommand}" BackgroundColor="#333" HorizontalOptions="StartAndExpand"/>
+                <!-- Button to add new folder -->
+                <Button Text="Add new folder!" Command="{Binding AddFolderCommand}" FontSize="Medium" TextColor="White" BackgroundColor="#333" HorizontalOptions="EndAndExpand"/>
             </StackLayout>
-        </Grid>
-    </ContentView>
 
+            <ListView x:Name="MyList" ItemsSource="{Binding BasicItems}" Margin="0,0,0,50">
 
+                <ListView.Header>
+                    <StackLayout Orientation="Horizontal" Margin="0,0,0,50">
+                        <Label Text="Type"              HorizontalOptions="FillAndExpand" FontSize="Medium" Margin="30,0,0,0"></Label>
+                        <Label Text="ID"                HorizontalOptions="FillAndExpand" FontSize="Medium"></Label>
+                        <Label Text="Name"              HorizontalOptions="FillAndExpand" FontSize="Medium"></Label>
+                        <Label Text="Size(bytes)"       HorizontalOptions="FillAndExpand" FontSize="Medium"></Label>
+                        <Label Text="Creation Time"     HorizontalOptions="FillAndExpand" FontSize="Medium"></Label>
+                    </StackLayout>
+                </ListView.Header>
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.ContextActions >
+                                <MenuItem Text="Open Item"      Clicked="MenuItem_Clicked_Open"     CommandParameter="{Binding .}"></MenuItem>
+                                <MenuItem Text="Download Item"  Clicked="MenuItem_Clicked_Download" CommandParameter="{Binding .}"></MenuItem>
+                                <MenuItem Text="Delete Item"    Clicked="MenuItem_Clicked_Delete"  CommandParameter="{Binding .}"></MenuItem>
+                            </ViewCell.ContextActions>
+
+                            <StackLayout Orientation="Horizontal" Margin="0,0,0,20">
+                                <Image Source="{Binding Type}" WidthRequest="150"></Image>
+                                <Label Text="{Binding ID}"              HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"></Label>
+                                <Label Text="{Binding Name}"            HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"></Label>
+                                <Label Text="{Binding Size}"            HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"></Label>
+                                <Label Text="{Binding createdTime}"     HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"></Label>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+            </ListView>
+
+            <StackLayout Orientation="Horizontal">
+                <!-- Button to upload element -->
+                <Button ImageSource="Assets/upload.png" Command="{Binding AddCommand}" BackgroundColor="#333" HorizontalOptions="CenterAndExpand"/>
+            </StackLayout>
+
+        </StackLayout>
+
+    </ContentPage.Content>
 </ContentPage>

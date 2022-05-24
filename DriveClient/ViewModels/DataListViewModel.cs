@@ -26,8 +26,6 @@ namespace DriveClient.ViewModels
         /// <summary>
         /// ICommand objects for the buttons.
         /// </summary>
-        public ICommand DeleteCommand { get; set; }
-        public ICommand OpenCommand { get; set; }
         public ICommand AddCommand { get; set; }
         public ICommand ChangeViewCommand { get; set; }
         public ICommand BackCommand { get; set; }
@@ -36,8 +34,6 @@ namespace DriveClient.ViewModels
         {
             LoadData(string.Empty);
 
-            DeleteCommand       = new Command<string>(DeleteCommandExecute);
-            OpenCommand         = new Command(OpenCommandExecute);
             AddCommand          = new Command(AddCommandExecute);
             ChangeViewCommand   = new Command(ChangeViewCommandExecute);
             BackCommand         = new Command(BackCommandExecute);
@@ -97,8 +93,7 @@ namespace DriveClient.ViewModels
 
                     await App.Current.MainPage.DisplayAlert("Success!", $"File: {result.FileName} uploaded!", "OK");
                 }
-            }catch(Exception)
-            {
+            }catch(Exception){
                 await App.Current.MainPage.DisplayAlert("Error", "There was an error with: opening file!", "OK");
             }
             finally {
@@ -110,21 +105,6 @@ namespace DriveClient.ViewModels
         private async void ChangeViewCommandExecute(object obj)
         {
             await App.Current.MainPage.DisplayAlert("Error", "There was an error with: ", "OK");
-            this.OnAppearing();
-        }
-
-
-        //TODO: Delete file/folder command
-        private async void DeleteCommandExecute(object obj)
-        {
-            await App.Current.MainPage.DisplayAlert("Error", " There was an error with: ", "OK");
-            this.OnAppearing();
-        }
-
-        //TODO: Open file/folder command
-        private async void OpenCommandExecute()
-        {
-            await App.Current.MainPage.DisplayAlert("Error", " There was an error with: ", "OK");
             this.OnAppearing();
         }
 
