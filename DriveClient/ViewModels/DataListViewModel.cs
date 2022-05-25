@@ -24,11 +24,15 @@ namespace DriveClient.ViewModels
         public string FullURLposition { get { return "Your current position: " + BasicItemService.Instance.actualPath; } }
 
         /// <summary>
-        /// ICommand objects for the buttons.
+        /// ICommand objects for the button controls.
         /// </summary>
         public ICommand AddCommand { get; set; }
         public ICommand BackCommand { get; set; }
 
+        /// <summary>
+        /// Constructor initializes the ICommand attributes with delegates.
+        /// </summary>
+        /// <param name="navigation">Xamarin specific thing</param>
         public DataListViewModel(INavigation navigation) : base(navigation)
         {
             LoadData(string.Empty);
