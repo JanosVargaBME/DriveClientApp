@@ -27,26 +27,27 @@ namespace DriveClient.Views
             (this.BindingContext as DataListViewModel).OnAppearing();
         }
 
-        private void MenuItem_Clicked_Open(object sender, EventArgs e)
+        private async void MenuItem_Clicked_Open(object sender, EventArgs e)
         {
             var mi = sender as MenuItem;
 
             BasicItem bi = (BasicItem)mi.CommandParameter;
 
-            if(bi != null)
+            if (bi != null)
             {
                 if (bi.Type.Contains("Folder"))
-                    (this.BindingContext as DataListViewModel).LoadData(((DirectoryItem)bi).FullPath);
+                    await (this.BindingContext as DataListViewModel).LoadData(((DirectoryItem)bi).FullPath);
             }
         }
 
-        private void MenuItem_Clicked_Download(object sender, EventArgs e)
+        //TODO
+        private async void MenuItem_Clicked_Download(object sender, EventArgs e)
         {
             var mi = sender as MenuItem;
 
             BasicItem bi = (BasicItem)mi.CommandParameter;
 
-            BasicItemService.Instance.DownloadBasicItem(bi);
+            await BasicItemService.Instance.DownloadBasicItem(bi);
         }
 
         private void MenuItem_Clicked_Delete(object sender, EventArgs e)
@@ -56,6 +57,15 @@ namespace DriveClient.Views
             BasicItem bi = (BasicItem)mi.CommandParameter;
 
             BasicItemService.Instance.DeleteBasicItem(bi);
+        }
+
+        private async void Add_Button_Clicked(object sender, EventArgs e)
+        {
+            string folderName = await DisplayPromptAsync("Trying to create folder!", "What's the name of the folder?");
+
+            await BasicItemService.Instance.CreateFolder(folderName);
+
+            await (this.BindingContext as DataListViewModel).LoadData(BasicItemService.Instance.actualPath);
         }
     }
 }

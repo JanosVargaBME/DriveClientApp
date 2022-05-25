@@ -27,16 +27,14 @@ namespace DriveClient.ViewModels
         /// ICommand objects for the buttons.
         /// </summary>
         public ICommand AddCommand { get; set; }
-        public ICommand ChangeViewCommand { get; set; }
         public ICommand BackCommand { get; set; }
 
         public DataListViewModel(INavigation navigation) : base(navigation)
         {
             LoadData(string.Empty);
 
-            AddCommand          = new Command(AddCommandExecute);
-            ChangeViewCommand   = new Command(ChangeViewCommandExecute);
-            BackCommand         = new Command(BackCommandExecute);
+            AddCommand      = new Command(AddCommandExecute);
+            BackCommand     = new Command(BackCommandExecute);
         }
 
         /// <summary>
@@ -101,13 +99,9 @@ namespace DriveClient.ViewModels
             }
         }
 
-        //TODO: Change to other view
-        private async void ChangeViewCommandExecute(object obj)
-        {
-            await App.Current.MainPage.DisplayAlert("Error", "There was an error with: ", "OK");
-            this.OnAppearing();
-        }
-
+        /// <summary>
+        /// Refreshes the BasicItem list and the url position when it's called
+        /// </summary>
         public override void OnAppearing()
         {
             base.OnAppearing();

@@ -13,7 +13,7 @@
                 <!-- Button to get back to the parent folder -->
                 <Button ImageSource="Assets/back_arrow_32.png" Command="{Binding BackCommand}" BackgroundColor="#333" HorizontalOptions="StartAndExpand"/>
                 <!-- Button to add new folder -->
-                <Button Text="Add new folder!" Command="{Binding AddFolderCommand}" FontSize="Medium" TextColor="White" BackgroundColor="#333" HorizontalOptions="EndAndExpand"/>
+                <Button Text="Add new folder!" Command="{Binding AddFolderCommand}" Clicked="Add_Button_Clicked" FontSize="Medium" TextColor="White" BackgroundColor="#333" HorizontalOptions="EndAndExpand"/>
             </StackLayout>
 
             <ListView x:Name="MyList" ItemsSource="{Binding BasicItems}" Margin="0,0,0,50">

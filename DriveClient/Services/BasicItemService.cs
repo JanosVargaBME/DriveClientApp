@@ -27,8 +27,14 @@ namespace DriveClient.Services
 
             basicItems.AddRange(files);
 
-
             return basicItems;
+        }
+        public async Task CreateFolder(string name)
+        {
+            if(actualPath == "")
+                await DropBoxService.Instance.CreateFolder("/" + name);
+            else
+                await DropBoxService.Instance.CreateFolder(actualPath + "/" + name);
         }
 
         public async Task DeleteBasicItem(BasicItem basicItem)
@@ -36,9 +42,9 @@ namespace DriveClient.Services
 
         }
 
-        internal void DownloadBasicItem(BasicItem bi)
+        public async Task DownloadBasicItem(BasicItem bi)
         {
-            throw new NotImplementedException();
+            
         }
     }
 }
