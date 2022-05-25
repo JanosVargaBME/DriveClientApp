@@ -29,17 +29,26 @@ namespace DriveClient.Services
 
             return basicItems;
         }
-        public async Task CreateFolder(string name)
+        public async Task<bool> CreateFolder(string name)
         {
-            if(actualPath == "")
-                await DropBoxService.Instance.CreateFolder("/" + name);
+            bool result = false;
+            if (actualPath == "")
+                result = await DropBoxService.Instance.CreateFolder("/" + name);
             else
-                await DropBoxService.Instance.CreateFolder(actualPath + "/" + name);
+                result = await DropBoxService.Instance.CreateFolder(actualPath + "/" + name);
+
+            return result;
         }
 
-        public async Task DeleteBasicItem(BasicItem basicItem)
+        public async Task<bool> DeleteBasicItem(BasicItem basicItem)
         {
+            bool result = false;
+            if (basicItem.Type.Contains("Folder"))
+                result = await DropBoxService.Instance.DeleteFolderOrFile(((DirectoryItem)basicItem).FullPath);
+            else
+                result = await DropBoxService.Instance.DeleteFolderOrFile(actualPath + "/" + basicItem.Name);
 
+            return result;
         }
 
         public async Task DownloadBasicItem(BasicItem bi)

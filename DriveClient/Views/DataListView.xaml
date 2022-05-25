@@ -18,6 +18,7 @@
 
             <ListView x:Name="MyList" ItemsSource="{Binding BasicItems}" Margin="0,0,0,50">
 
+                <!-- Column header definitions -->
                 <ListView.Header>
                     <StackLayout Orientation="Horizontal" Margin="0,0,0,50">
                         <Label Text="Type"              HorizontalOptions="FillAndExpand" FontSize="Medium" Margin="30,0,0,0"></Label>
@@ -31,12 +32,14 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
+                            <!-- The Context Action definitions (Right-Click on MenuItem) -->
                             <ViewCell.ContextActions >
-                                <MenuItem Text="Open Item"      Clicked="MenuItem_Clicked_Open"     CommandParameter="{Binding .}"></MenuItem>
+                                <MenuItem Text="Open Folder"      Clicked="MenuItem_Clicked_Open"     CommandParameter="{Binding .}"></MenuItem>
                                 <MenuItem Text="Download Item"  Clicked="MenuItem_Clicked_Download" CommandParameter="{Binding .}"></MenuItem>
                                 <MenuItem Text="Delete Item"    Clicked="MenuItem_Clicked_Delete"  CommandParameter="{Binding .}"></MenuItem>
                             </ViewCell.ContextActions>
 
+                            <!-- The data is rendered here -->
                             <StackLayout Orientation="Horizontal" Margin="0,0,0,20">
                                 <Image Source="{Binding Type}" WidthRequest="150"></Image>
                                 <Label Text="{Binding ID}"              HorizontalOptions="FillAndExpand" HorizontalTextAlignment="Start" VerticalTextAlignment="Center"></Label>
