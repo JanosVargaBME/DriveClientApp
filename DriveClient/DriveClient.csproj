@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <PackageReference Include="Dropbox.Api" Version="6.27.0" />
+    <PackageReference Include="Xam.Plugin.FilePicker" Version="1.1.0" />
     <PackageReference Include="Xamarin.Forms" Version="5.0.0.2196" />
     <PackageReference Include="Xamarin.Essentials" Version="1.7.0" />
     <PackageReference Include="Xamarin.Forms.DataGrid" Version="4.8.0" />

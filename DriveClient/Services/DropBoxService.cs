@@ -170,6 +170,29 @@ namespace DriveClient.Services
             }
         }
 
+        public async Task<bool> DownloadFile(string name, Stream stream)
+        {
+            using (var dbx = new DropboxClient(accessToken))
+            {
+                try
+                {
+                    var data = await dbx.Files.DownloadAsync(BasicItemService.Instance.actualPath + "/" + name);
+
+                    Stream ds = await data.GetContentAsStreamAsync();
+
+                    await ds.CopyToAsync(stream);
+
+                    ds.Dispose();
+                }
+                catch (Exception)
+                {
+                    return false;
+                }
+
+                return true;
+            }
+        }
+
         /// <summary>
         /// This method tries to Create a folder in the dropbox api, by calling the CreateFolderV2Async() function.
         /// </summary>

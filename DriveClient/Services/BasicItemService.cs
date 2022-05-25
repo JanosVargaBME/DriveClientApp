@@ -1,8 +1,8 @@
 ﻿using DriveClient.Models;
-using System;
 using System.Collections.Generic;
-using System.Text;
+using System.IO;
 using System.Threading.Tasks;
+using Xamarin.Essentials;
 
 namespace DriveClient.Services
 {
@@ -88,7 +88,10 @@ namespace DriveClient.Services
         {
             bool result = false;
 
-
+            if(result)
+            {
+                //await DropBoxService.Instance.DownloadFile(bi.Name, stream);
+            }
 
             return result;
         }
