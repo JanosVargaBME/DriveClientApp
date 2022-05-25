@@ -1,17 +1,15 @@
-# In Progress....
-
-## DriveClient application for the homework of "Client Side Technologies" subject in the Second semester of 2021/22
+# DriveClient application for the homework of "Client Side Technologies" subject in the Second semester of 2021/22
 
 ### Description
 
-Making a Google drive like desktop and mobile client, for Google Drive.
+Making a DropBox like desktop and mobile client, for DropBox API.
 
 ### Used technologies
 
 Xamarin
-Google Drive's API
+DropBox's API
 
-### GoogleDrive test login
+### DropBox gmail test login
 
 - email: 	`drive.test.xamarin@gmail.com`
 - password:	`asdQWE123Xam`

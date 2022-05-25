@@ -170,6 +170,12 @@ namespace DriveClient.Services
             }
         }
 
+        /// <summary>
+        /// Not used :(
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="stream"></param>
+        /// <returns></returns>
         public async Task<bool> DownloadFile(string name, Stream stream)
         {
             using (var dbx = new DropboxClient(accessToken))
